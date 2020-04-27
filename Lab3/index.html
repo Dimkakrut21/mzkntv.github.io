@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <style type="text/css">
+            h1 {
+                background-color: lightgray;
+            }
+        </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>ЛР 3</title>
+        <script src="countries.js"></script>
+    </head>
+    <body>
+
+    </body>
+    <script>
+        function outArrayData(data, index) {
+            if (typeof(data) == "string") {
+                return "<td>" + "&#1012" + (index+2) + ";" + data + "</td>";
+            } else {
+                return "<td>" + "&#1012" + (index+2) + ";" + data[0] + "<br>«" + data[1] + "»<br>(" + data[2] + ");</td>";
+            }
+        }
+        function makeTableFromCountry(country) {
+            tab = "<table width=100%>";
+                tab += "<tr align='center'><td><h1>" + country[0] + " - " + country[1] + "</h1></td></tr>";
+                tab += "<tr><td><table width=75%>";
+                    for (let i = 2; i < 6; i++) {
+                        tab += "<tr><td align='center'><i>" + about[i] + "</i></td><td>" + country[i] + "</td></tr>";
+                    }
+                tab +="</table></td></tr>";
+                let gObj = country[6].map(outArrayData);
+                tab += "<tr><td><table width='100%'><colgroup width='50%'>";
+                gObj.map(function(item, pos) {
+                    tab += "<tr valign='top'>" + "<td align='right'><i>" + (pos == 0 && about[6] + ":" || "") + "</i></td>" + item + "</tr>";
+                });
+                tab += "</table></td></tr>";
+                
+                tab += "<tr><td><table width='100%'><colgroup width='50%'>";
+                let litObj = country[7].map(outArrayData);
+                litObj.map(function(item, pos) {
+                    tab += "<tr valign='top'>" + "<td><i>" + (pos == 0 && about[7] + ":" || "") + "</i></td>" + item + "</tr>";
+                });
+                tab += "</table></td></tr>";
+                tab += "<tr><td align='center'><b>Исторические события</b></td></tr>";
+                tab += "<tr><td><table width='100%' border='1'>"
+                let events = country[8];
+                for (let key in events) {
+                    tab += "<td><b>" + key + "</b> - " + events[key] + "</td>";
+                }
+                tab += "</table></td></tr>"
+            tab +="</table>";
+            return tab; 
+        }
+        let tbl = countries.map(makeTableFromCountry);
+        tbl.forEach(element => {
+            document.body.innerHTML += element+"<br>"
+        });
+    </script>
+</html>
