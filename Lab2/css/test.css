@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.shadowtext {
+    text-shadow: 1px 1px 2px black, 0 0 1em red; 
+    color: white; 
+    font-size: 2em; 
+}
+
+body {
+    background: url(../image/bg-right.png) repeat-y 100%, #fc0;
+    font-family: 'Jura', sans-serif;
+    font-weight: 100;
+    font-stretch: expanded;
+}
+
+h1 {
+    color: red;
+    font-family: 'Lobster', cursive;
+    font-variant: small-caps;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+p {
+    font-family: 'Jura', sans-serif;
+    font-weight: 100;
+    font-stretch: expanded;
+    letter-spacing: 2px;
+}

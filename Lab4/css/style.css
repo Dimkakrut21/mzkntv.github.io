@@ -1,0 +1,7 @@
+h1 {
+    background-color: lightgray;
+}
+.clock {
+    text-align: center;
+    border: 1px solid #333;
+}
