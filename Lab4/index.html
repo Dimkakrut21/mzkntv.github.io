@@ -2,7 +2,7 @@
     <head>
         <link href="css/style.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>ЛР 3</title>
+        <title>ЛР 4</title>
         <script src="countries.js"></script>
     </head>
     <body>
@@ -29,50 +29,115 @@
                 </tr>
             </tfoot>
         </table>
+        <p>Выбери пункт для отображения:</p>
+        <form id="partChooser">
+            <label><input type="radio" name="part" value="a">а)</label>
+            <label><input type="radio" name="part" value="b">б)</label>
+            <label><input type="radio" name="part" value="v">в)</label>
+            <label><input type="radio" name="part" value="g">г)</label>
+            <label><input type="radio" name="part" value="d">д)</label>
+        </form>
+        <div id="countriesTable"></div>
     </body>
     <script src="clocks.js"></script>
     <script>
-        function outArrayData(data, index) {
-            if (typeof(data) == "string") {
-                return "<td>" + "&#1012" + (index+2) + ";" + data + "</td>";
-            } else {
-                return "<td>" + "&#1012" + (index+2) + ";" + data[0] + "<br>«" + data[1] + "»<br>(" + data[2] + ");</td>";
-            }
-        }
-        function makeTableFromCountry(country) {
-            tab = "<table width=100%>";
-                tab += "<tr align='center'><td><h1>" + country[0] + " - " + country[1] + "</h1></td></tr>";
-                tab += "<tr><td><table width=75%>";
-                    for (let i = 2; i < 6; i++) {
-                        tab += "<tr><td align='center'><i>" + about[i] + "</i></td><td>" + country[i] + "</td></tr>";
+        obj1 = {
+            countries: countries,
+            outCountries: function(){
+                function outArrayData(data, index) {
+                    if (typeof(data) == "string") {
+                        return "<td>" + "&#1012" + (index+2) + ";" + data + "</td>";
+                    } else {
+                        return "<td>" + "&#1012" + (index+2) + ";" + data[0] + "<br>«" + data[1] + "»<br>(" + data[2] + ");</td>";
                     }
-                tab +="</table></td></tr>";
-                let gObj = country[6].map(outArrayData);
-                tab += "<tr><td><table width='100%'><colgroup width='50%'>";
-                gObj.map(function(item, pos) {
-                    tab += "<tr valign='top'>" + "<td align='right'><i>" + (pos == 0 && about[6] + ":" || "") + "</i></td>" + item + "</tr>";
-                });
-                tab += "</table></td></tr>";
-                
-                tab += "<tr><td><table width='100%'><colgroup width='50%'>";
-                let litObj = country[7].map(outArrayData);
-                litObj.map(function(item, pos) {
-                    tab += "<tr valign='top'>" + "<td><i>" + (pos == 0 && about[7] + ":" || "") + "</i></td>" + item + "</tr>";
-                });
-                tab += "</table></td></tr>";
-                tab += "<tr><td align='center'><b>Исторические события</b></td></tr>";
-                tab += "<tr><td><table width='100%' border='1'>"
-                let events = country[8];
-                for (let key in events) {
-                    tab += "<td><b>" + key + "</b> - " + events[key] + "</td>";
                 }
-                tab += "</table></td></tr>"
-            tab +="</table>";
-            return tab; 
-        }
-        let tbl = countries.map(makeTableFromCountry);
-        tbl.forEach(element => {
-            document.body.innerHTML += element+"<br>"
+                function makeTableFromCountry(country) {
+                    tab = "<table width=100%>";
+                        tab += "<tr align='center'><td><h1>" + country[0] + " - " + country[1] + "</h1></td></tr>";
+                        tab += "<tr><td><table width=75%>";
+                            for (let i = 2; i < 6; i++) {
+                                tab += "<tr><td align='center'><i>" + about[i] + "</i></td><td>" + country[i] + "</td></tr>";
+                            }
+                        tab +="</table></td></tr>";
+                        let gObj = country[6].map(outArrayData);
+                        tab += "<tr><td><table width='100%'><colgroup width='50%'>";
+                        gObj.map(function(item, pos) {
+                            tab += "<tr valign='top'>" + "<td align='right'><i>" + (pos == 0 && about[6] + ":" || "") + "</i></td>" + item + "</tr>";
+                        });
+                        tab += "</table></td></tr>";
+                        
+                        tab += "<tr><td><table width='100%'><colgroup width='50%'>";
+                        let litObj = country[7].map(outArrayData);
+                        litObj.map(function(item, pos) {
+                            tab += "<tr valign='top'>" + "<td><i>" + (pos == 0 && about[7] + ":" || "") + "</i></td>" + item + "</tr>";
+                        });
+                        tab += "</table></td></tr>";
+                        tab += "<tr><td align='center'><b>Исторические события</b></td></tr>";
+                        tab += "<tr><td><table width='100%' border='1'>"
+                        let events = country[8];
+                        for (let key in events) {
+                            tab += "<td><b>" + key + "</b> - " + events[key] + "</td>";
+                        }
+                        tab += "</table></td></tr>"
+                    tab +="</table>";
+                    return tab; 
+                }
+                let tbl = this.countries.map(makeTableFromCountry);
+                let where = document.getElementById("countriesTable");
+                where.innerHTML = "";
+                tbl.forEach(element => {
+                    where.innerHTML += element+"<br>"
+                });
+            }
+        };
+        function Changes() {
+            this.countries = countries;
+            this.changeCountries = function(data) {
+                if ( this.countries.some(country => country[4] > data) ) {
+                    this.countries.forEach(country => {
+                        country[0] = country[4] > data ? country[0].toUpperCase() : country[0]; 
+                    });
+                };
+            };
+        };
+        let obj2 = new Changes();
+
+        // Пункт а)
+        // obj1.outCountries();
+
+        // Пункт б)
+        // obj1.outCountries.call(obj2);
+
+        // Пункт в)
+        // obj2.changeCountries.call(obj1, 0);
+
+        // Пункт г)
+        // obj2.changeCountries.call(obj1,0);
+        // obj1.outCountries();
+
+        // Пункт д)
+        let partChooser = document.getElementById("partChooser");
+        partChooser.addEventListener('change', function(event){
+            console.log(countries);
+            switch(event.target.value) {
+                case "a":
+                    obj1.outCountries();
+                    break;
+                case "b":
+                    obj1.outCountries.call(obj2);
+                    break;
+                case "v":
+                    obj2.changeCountries.call(obj1, 0);
+                    break;
+                case "g":
+                    obj2.changeCountries.call(obj1,0);
+                    obj1.outCountries();
+                    break;
+                case "d":
+                    
+                    break;
+            };
         });
+
     </script>
 </html>
