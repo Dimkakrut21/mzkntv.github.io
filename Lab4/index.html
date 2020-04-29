@@ -41,6 +41,7 @@
     </body>
     <script src="clocks.js"></script>
     <script>
+        let where = document.getElementById("countriesTable");
         obj1 = {
             countries: countries,
             outCountries: function(){
@@ -83,8 +84,6 @@
                     return tab; 
                 }
                 let tbl = this.countries.map(makeTableFromCountry);
-                let where = document.getElementById("countriesTable");
-                where.innerHTML = "";
                 tbl.forEach(element => {
                     where.innerHTML += element+"<br>"
                 });
@@ -102,23 +101,9 @@
         };
         let obj2 = new Changes();
 
-        // Пункт а)
-        // obj1.outCountries();
-
-        // Пункт б)
-        // obj1.outCountries.call(obj2);
-
-        // Пункт в)
-        // obj2.changeCountries.call(obj1, 0);
-
-        // Пункт г)
-        // obj2.changeCountries.call(obj1,0);
-        // obj1.outCountries();
-
-        // Пункт д)
         let partChooser = document.getElementById("partChooser");
         partChooser.addEventListener('change', function(event){
-            console.log(countries);
+            where.innerHTML = "";
             switch(event.target.value) {
                 case "a":
                     obj1.outCountries();
@@ -134,7 +119,9 @@
                     obj1.outCountries();
                     break;
                 case "d":
-                    
+                    obj1.outCountries.call(obj2);
+                    obj2.changeCountries(0);
+                    obj1.outCountries.call(obj2);
                     break;
             };
         });
