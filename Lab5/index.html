@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <link href="css/style.css" rel="stylesheet">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>ЛР 5</title>
+    </head>
+    <body>
+        <table class="clock">
+            <thead>
+                <tr>
+                    <th colspan="4">До начала <span id="years"></span> учебного года</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="days"></td>
+                    <td id="hours"></td>
+                    <td id="minutes"></td>
+                    <td id="seconds"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>дней</th>
+                    <th>часов</th>
+                    <th>минут</th>
+                    <th>секунд</th>
+                </tr>
+            </tfoot>
+        </table>
+        <input type="text" id="elementId" name="name" size="32" placeholder="Id для изменения">
+        <br>
+        <textarea id="elementCode" name="name" rows="5" cols="33" placeholder="HTML-код"></textarea>
+        <div id="countriesTable">smth</div>
+    </body>
+    <script src="clocks.js"></script>
+    <script>
+        let elementId = document.getElementById("elementId");
+        let elementCode = document.getElementById("elementCode");
+        let currentElementById;
+        console.log(elementCode.value);
+        if (elementId.addEventListener) {
+            elementId.addEventListener('change', chooseEventListener)
+        }
+        function incapsulateHTML() {
+            console.log("hi")
+            let tempId = currentElementById.id;
+            currentElementById.innerHTML = elementCode.value;
+            console.log(currentElementById.id);
+        }
+        function chooseEventListener(e) {
+            if (currentElementById && currentElementById.removeEventListener) {
+                alert("Удаляю EventListener у элемента с ID " + currentElementById.id)
+                currentElementById.removeEventListener('click', incapsulateHTML);
+            }
+            currentElementById = document.getElementById(e.target.value);
+            if (currentElementById && currentElementById.addEventListener) {
+                currentElementById.addEventListener('click', incapsulateHTML);
+            } else {
+                alert("Id " + elementId.value + " не найден. EventListener установлен не будет.");
+            }
+            console.log(currentElementById);
+        }
+    </script>
+</html>
