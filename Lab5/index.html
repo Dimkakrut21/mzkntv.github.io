@@ -39,14 +39,20 @@
         let elementCode = document.getElementById("elementCode");
         let currentElementById;
         console.log(elementCode.value);
+        // Браузер поддерживает спецификацию W3C
         if (elementId.addEventListener) {
+            // "Слушаю" поле для Id элемента
             elementId.addEventListener('change', chooseEventListener)
         }
         function incapsulateHTML() {
-            console.log("hi")
-            let tempId = currentElementById.id;
-            currentElementById.innerHTML = elementCode.value;
-            console.log(currentElementById.id);
+            let newElem = document.createElement('p');
+            newElem.innerHTML = elementCode.value;
+            newElem.id = currentElementById.id;
+            currentElementById.removeEventListener('click', incapsulateHTML);
+            currentElementById.replaceWith(newElem);
+            currentElementById = newElem;
+            currentElementById.addEventListener('click', incapsulateHTML);
+            // console.log(document.getElementById(newElem.id))
         }
         function chooseEventListener(e) {
             if (currentElementById && currentElementById.removeEventListener) {
