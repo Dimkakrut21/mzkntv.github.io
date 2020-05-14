@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@media print {
+  h1 {
+    background-color: aqua;
+  }
+}
+.shadowtext {
+    text-shadow: 1px 1px 2px black, 0 0 1em red; 
+    color: white; 
+    font-size: 2em; 
+}
+div + h1 {
+    background: green;
+    color: red;
+    font-family: 'Lobster', cursive;
+    font-variant: small-caps;
+    text-align: center;
+    text-transform: uppercase;
+}
+p {
+    font-family: 'Lobster', cursive;
+    font-weight: 100;
+    font-stretch: expanded;
+    letter-spacing: 2px;
+}
+body {
+    background: linear-gradient(white 33%,blue  33% ,blue  66%,red 66%);
+    font-family: 'Jura', sans-serif;
+    font-weight: 100;
+    font-stretch: expanded;
+}
+ul {
+  list-style-type: lower-greek;
+}
+nav > ul {
+  display: block;
+  width: 30%;
+  height:auto;
+  margin:0px;
+  padding:0px;
+  list-style:none;
+  position:relative;
+}
+nav ul li {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+nav ul li a {
+  position:relative;
+  display:block;
+  width:100%;
+  height:auto;
+  box-sizing:border-box;
+  font-size:13px;
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#FBF7F7;
+  line-height:1.2em;
+  padding:10px 15px;
+  background:#3A9CD3;
+  border-top:1px solid #236A92;
+  text-decoration:none;
+}
+nav ul li a:hover {
+  background:#0A3CC1;
+}
+nav ul li ul {
+  position:absolute;
+  top:0px;
+  left:100%;
+  display:none;
+  width:auto;
+}
+nav ul li:hover ul {
+  display: block;
+}
+nav ul li ul li a {
+  white-space: nowrap;
+  text-transform: none;
+  padding: 5px 20px;
+}
+.tossing{
+  animation-name: tossing;
+  -webkit-animation-name: tossing;    
+
+  animation-duration: 2.5s;   
+  -webkit-animation-duration: 2.5s;
+
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes tossing {
+  0% {
+      transform: rotate(-4deg);   
+  }
+  50% {
+      transform: rotate(4deg);
+  }
+  100% {
+      transform: rotate(-4deg);   
+  }                       
+}
+
+@-webkit-keyframes tossing {
+  0% {
+      -webkit-transform: rotate(-4deg);   
+  }
+  50% {
+      -webkit-transform: rotate(4deg);
+  }
+  100% {
+      -webkit-transform: rotate(-4deg);   
+  }               
+}
+[data-tooltip] {
+  position: relative; /* Относительное позиционирование */ 
+ }
+ [data-tooltip]::after {
+  content: attr(data-tooltip); /* Выводим текст */
+  position: absolute; /* Абсолютное позиционирование */
+  width: 300px; /* Ширина подсказки */
+  left: 0; top: 0; /* Положение подсказки */
+  background: #3989c9; /* Синий цвет фона */
+  color: #fff; /* Цвет текста */
+  padding: 0.5em; /* Поля вокруг текста */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
+  pointer-events: none; /* Подсказка */
+  opacity: 0; /* Подсказка невидима */
+  transition: 1s; /* Время появления подсказки */
+ } 
+ [data-tooltip]:hover::after {
+  opacity: 1; /* Показываем подсказку */
+  top: 2em; /* Положение подсказки */
+ }
+ .img img{
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.img img:hover{
+ transition: 1s;
+ transform: scale(1.2, 1.2);
+}
+
+.img{ 
+  columns: 3;
+}
+section {
+   display: flex;
+   flex-flow: row wrap;
+}
+table {
+   background: darkseagreen;
+ }
+table td {
+  text-align: center;
+}
